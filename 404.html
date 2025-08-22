@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kawe Nia • Data Tidak Ditemukan</title>
+  <style>
+    :root{
+      --bg:#0b1020;          /* page background */
+      --panel:#0f172a;       /* card base */
+      --ink:#e5e7eb;         /* main text */
+      --muted:#9ca3af;       /* secondary text */
+      --accent:#22c55e;      /* green accent */
+      --accent-2:#38bdf8;    /* blue accent */
+      --line:#1f2937;        /* hairline borders */
+      --danger:#ef4444;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --space: clamp(14px, 2.4vw, 22px);
+    }
+
+    /* ====== Reset kecil agar teks selalu wrap & tidak kepotong ====== */
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, #16223f 0%, transparent 60%),
+        linear-gradient(145deg,#0a0e1a,#0f1933 55%,#0a0e1a);
+    }
+    /* Pastikan SEMUA elemen bisa mengecil & membungkus teks panjang */
+    body, body *{
+      min-width:0;                   /* izinkan shrink di flex/grid */
+      overflow-wrap:anywhere;        /* bungkus kata sangat panjang/URL */
+      word-break:break-word;         /* jaga kalau ada string tanpa spasi */
+      white-space:normal;            /* jangan paksa satu baris */
+    }
+
+    .wrap{ max-width:1100px; margin:40px auto; padding:0 20px }
+
+    /* Header */
+    .topbar{ display:flex; align-items:center; gap:16px; margin-bottom:18px }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0 }
+    .brand img{
+      width:44px; height:44px; object-fit:cover; border-radius:10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.35)
+    }
+    .brand .title{ font-weight:700; font-size: clamp(16px,2.4vw,20px) }
+    .brand .sub{ font-size:12px; color:var(--muted) }
+    .pill{
+      margin-left:auto; display:flex; gap:8px; align-items:center; font-size:12px; color:#cbd5e1;
+      background:linear-gradient(180deg, rgba(239,68,68,.2), rgba(239,68,68,.15));
+      border:1px solid rgba(239,68,68,.3); padding:6px 10px; border-radius:999px;
+      flex-shrink:0;
+    }
+
+    /* Main Card */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.2);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      text-align: center;
+      padding: clamp(40px, 8vw, 80px) var(--space);
+    }
+
+    /* Error Icon */
+    .error-icon {
+      font-size: clamp(60px, 12vw, 120px);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    /* Error Content */
+    .error-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .error-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #fca5a5;
+    }
+
+    .error-message {
+      font-size: clamp(16px, 2.5vw, 18px);
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .error-details {
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.3);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .error-details h3 {
+      font-size: 14px;
+      color: #fca5a5;
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+
+    .error-details ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .error-details li {
+      margin-bottom: 6px;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: .3px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.1s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, rgba(34,197,94,.9), rgba(16,185,129,.9));
+      border: 1px solid rgba(16,185,129,.9);
+      color: #052e1a;
+    }
+
+    .btn.secondary {
+      background: rgba(15,23,42,.8);
+      border: 1px solid rgba(148,163,184,.3);
+      color: #e5e7eb;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Footer */
+    .card-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(148,163,184,.2);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Lambang_Kabupaten_Mimika.jpg/500px-Lambang_Kabupaten_Mimika.jpg" alt="Lambang Kabupaten">
+        <div>
+          <div class="title">Kawe Nia • Pelayanan Masyarakat</div>
+          <div class="sub">Distrik Wania, Kabupaten Mimika</div>
+        </div>
+      </div>
+      <div class="pill">⚠️ Data Tidak Ditemukan</div>
+    </div>
+
+    <!-- Main Card -->
+    <section class="card" role="region" aria-label="Halaman Error">
+      <div class="error-content">
+        <div class="error-icon">📄❌</div>
+        
+        <h1 class="error-title">Tidak ada file dan data</h1>
+        
+        <p class="error-message">
+          File yang diminta tidak ditemukan, sudah dihapus.
+        </p>
+
+
+        <div class="actions">
+          <a href="https://distrikwania.com/" class="btn primary">
+            🏠 Kembali ke Beranda
+          </a>
+        </div>
+
+        <div class="card-footer">
+          © 2025 Pemerintah Distrik Wania • Kawe Nia
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
